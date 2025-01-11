@@ -16,6 +16,7 @@ class LeaderboardScreen extends StatelessWidget {
           ),
         ),
         elevation: 0,
+
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Container(

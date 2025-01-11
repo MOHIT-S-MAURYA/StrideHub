@@ -1,10 +1,10 @@
+// lib/bottom_nav_bar.dart
 import 'package:flutter/material.dart';
-import 'package:stridehub/features/home/screens/home_screen.dart'; // Adjust the import as needed
+import 'package:stridehub/features/home/screens/home_screen.dart';
 import 'package:stridehub/features/home/screens/challenges.dart';
 import 'package:stridehub/features/home/screens/leaderboard.dart';
 import 'package:stridehub/features/home/screens/profile_screen.dart';
 import 'package:stridehub/core/constants/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BottomNavScreen extends StatefulWidget {
   @override
@@ -27,23 +27,36 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     });
   }
 
+  Future<bool> _onWillPop() async {
+    if (_currentIndex != 0) {
+      setState(() {
+        _currentIndex = 0;
+      });
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_currentIndex],  // Display the current screen based on index
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.flag), label: 'Challenges'),
-          BottomNavigationBarItem(icon: Icon(Icons.leaderboard), label: 'Leaderboard'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-        currentIndex: _currentIndex,
-        onTap: _onItemTapped,
-        unselectedItemColor: AppColors.bottomNavigationBarItemColor,
-        selectedItemColor: AppColors.bottomNavigationBarItemSelectedColor,
-        type: BottomNavigationBarType.fixed,
-        elevation: 10,
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: _screens[_currentIndex],  // Display the current screen based on index
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.flag), label: 'Challenges'),
+            BottomNavigationBarItem(icon: Icon(Icons.leaderboard), label: 'Leaderboard'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          ],
+          currentIndex: _currentIndex,
+          onTap: _onItemTapped,
+          unselectedItemColor: AppColors.bottomNavigationBarItemColor,
+          selectedItemColor: AppColors.bottomNavigationBarItemSelectedColor,
+          type: BottomNavigationBarType.fixed,
+          elevation: 10,
+        ),
       ),
     );
   }

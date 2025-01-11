@@ -68,84 +68,87 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Login',
-          style: GoogleFonts.dosis(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textColor,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Login',
+            style: GoogleFonts.dosis(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textColor,
+            ),
           ),
+          elevation: 0,
         ),
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(color: AppColors.captionColor),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: TextStyle(color: AppColors.captionColor),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  filled: true,
+                  fillColor: Colors.transparent,
                 ),
-                filled: true,
-                fillColor: Colors.transparent,
-              ),
-              style: TextStyle(color: AppColors.textColor),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                labelStyle: TextStyle(color: AppColors.captionColor),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                filled: true,
-                fillColor: Colors.transparent,
-              ),
-              obscureText: true,
-              style: TextStyle(color: AppColors.textColor),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _login,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.buttonColor,
-                foregroundColor: AppColors.buttonTextColor,
-              ),
-              child: Text('Login'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: _googleSignIn,
-              icon: Icon(Icons.login, color: AppColors.textColor),
-              label: Text(
-                'Sign in with Google',
                 style: TextStyle(color: AppColors.textColor),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.buttonColor,
-                foregroundColor: AppColors.buttonTextColor,
+              SizedBox(height: 20),
+              TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: AppColors.captionColor),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  filled: true,
+                  fillColor: Colors.transparent,
+                ),
+                obscureText: true,
+                style: TextStyle(color: AppColors.textColor),
               ),
-            ),
-            SizedBox(height: 20),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.signup);
-              },
-              child: Text(
-                'Don\'t have an account? Sign up',
-                style: TextStyle(color: AppColors.primaryColor),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _login,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.buttonColor,
+                  foregroundColor: AppColors.buttonTextColor,
+                ),
+                child: Text('Login'),
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: _googleSignIn,
+                icon: Icon(Icons.login, color: AppColors.textColor),
+                label: Text(
+                  'Sign in with Google',
+                  style: TextStyle(color: AppColors.textColor),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.buttonColor,
+                  foregroundColor: AppColors.buttonTextColor,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, AppRoutes.signup);
+                },
+                child: Text(
+                  'Don\'t have an account? Sign up',
+                  style: TextStyle(color: AppColors.primaryColor),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

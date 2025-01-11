@@ -1,3 +1,4 @@
+// lib/features/home/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:stridehub/core/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // Hide the back button
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
