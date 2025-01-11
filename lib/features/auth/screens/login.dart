@@ -1,8 +1,10 @@
+// lib/features/auth/screens/login.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stridehub/core/constants/colors.dart';
+import 'package:stridehub/routes/app_routes.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,13 +16,28 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkLoginStatus();
+    });
+  }
+
+  Future<void> _checkLoginStatus() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+    }
+  }
+
   Future<void> _login() async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to sign in: $e')),
@@ -32,20 +49,19 @@ class _LoginPageState extends State<LoginPage> {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      if (googleUser != null) {
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
-
-        await _auth.signInWithCredential(credential);
-        Navigator.pushReplacementNamed(context, '/home');
+      if (googleUser == null) {
+        return; // The user canceled the sign-in
       }
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Google Sign-In failed: $e')),
+        SnackBar(content: Text('Failed to sign in with Google: $e')),
       );
     }
   }
@@ -117,6 +133,16 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.buttonColor,
                 foregroundColor: AppColors.buttonTextColor,
+              ),
+            ),
+            SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.signup);
+              },
+              child: Text(
+                'Don\'t have an account? Sign up',
+                style: TextStyle(color: AppColors.primaryColor),
               ),
             ),
           ],

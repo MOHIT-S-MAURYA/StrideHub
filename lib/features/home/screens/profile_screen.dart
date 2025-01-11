@@ -1,9 +1,18 @@
+// lib/features/home/screens/profile_screen.dart
 import 'package:flutter/material.dart';
-import 'package:stridehub/core/constants/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:stridehub/core/constants/colors.dart';
+import 'package:stridehub/routes/app_routes.dart';
 
 class ProfileScreen extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> _logout(BuildContext context) async {
+    await _auth.signOut();
+    Navigator.pushReplacementNamed(context, AppRoutes.login);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +133,7 @@ class ProfileScreen extends StatelessWidget {
                   leading: Icon(Icons.logout, color: AppColors.primaryColor),
                   title: Text('Logout'),
                   onTap: () {
-                    // Handle logout
+                    _logout(context);
                   },
                 ),
               ),
