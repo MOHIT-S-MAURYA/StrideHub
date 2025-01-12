@@ -16,7 +16,7 @@ class AppRoutes {
       case login:
         return MaterialPageRoute(builder: (_) => LoginPage());
       case signup:
-        return MaterialPageRoute(builder: (_) => SignupPage());
+        return MaterialPageRoute(builder: (_) => SignUpPage());
       case profileSetup:
         return MaterialPageRoute(builder: (_) => ProfileSetupPage());
       case home:
