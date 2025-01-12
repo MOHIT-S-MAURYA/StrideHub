@@ -2,11 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:stridehub/features/auth/screens/login.dart';
 import 'package:stridehub/features/auth/screens/signup.dart';
+import 'package:stridehub/features/auth/screens/profile_setup.dart';
 import 'package:stridehub/bottom_nav_bar.dart';
 
 class AppRoutes {
   static const String login = '/';
   static const String signup = '/signup';
+  static const String profileSetup = '/profileSetup';
   static const String home = '/home';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -15,6 +17,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => LoginPage());
       case signup:
         return MaterialPageRoute(builder: (_) => SignupPage());
+      case profileSetup:
+        return MaterialPageRoute(builder: (_) => ProfileSetupPage());
       case home:
         return MaterialPageRoute(builder: (_) => BottomNavScreen());
       default:

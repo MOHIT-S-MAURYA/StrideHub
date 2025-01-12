@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stridehub/core/constants/colors.dart';
 
 class ChallengesScreen extends StatelessWidget {
+  const ChallengesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +68,8 @@ class ChallengesScreen extends StatelessWidget {
                       // Handle filter selection
                     },
                     itemBuilder: (BuildContext context) {
-                      return {'Active', 'Completed', 'Pending'}.map((String choice) {
+                      return {'Active', 'Completed', 'Pending'}
+                          .map((String choice) {
                         return PopupMenuItem<String>(
                           value: choice,
                           child: Text(choice),
@@ -91,7 +94,8 @@ class ChallengesScreen extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/friend_profile.png'), // Replace with actual image path
+                    backgroundImage: AssetImage(
+                        'assets/images/friend_profile.png'), // Replace with actual image path
                   ),
                   title: Text('10K Run Challenge'),
                   subtitle: Column(
@@ -138,10 +142,12 @@ class ChallengesScreen extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/friend_profile.png'), // Replace with actual image path
+                    backgroundImage: AssetImage(
+                        'assets/images/friend_profile.png'), // Replace with actual image path
                   ),
                   title: Text('5K Walk Challenge'),
-                  subtitle: Text('Friend: Jane Smith\nStart Date: 1st Nov 2023'),
+                  subtitle:
+                      Text('Friend: Jane Smith\nStart Date: 1st Nov 2023'),
                   trailing: Column(
                     children: [
                       ElevatedButton(
@@ -174,10 +180,12 @@ class ChallengesScreen extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/friend_profile.png'), // Replace with actual image path
+                    backgroundImage: AssetImage(
+                        'assets/images/friend_profile.png'), // Replace with actual image path
                   ),
                   title: Text('Push-up Challenge'),
-                  subtitle: Text('Performance: 45/50 push-ups\nRank: 1st\nTrophies: 3'),
+                  subtitle: Text(
+                      'Performance: 45/50 push-ups\nRank: 1st\nTrophies: 3'),
                   trailing: IconButton(
                     icon: Icon(Icons.share),
                     onPressed: () {
@@ -199,7 +207,8 @@ class ChallengesScreen extends StatelessWidget {
               SizedBox(height: 10),
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.notifications, color: AppColors.primaryColor),
+                  leading:
+                      Icon(Icons.notifications, color: AppColors.primaryColor),
                   title: Text('You have a new challenge from John Doe'),
                   subtitle: Text('10K Run Challenge'),
                 ),
@@ -230,7 +239,8 @@ class ChallengesScreen extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(Icons.star, color: AppColors.primaryColor),
                   title: Text('Challenge of the Week: 10K Run'),
-                  subtitle: Text('Complete this challenge to earn extra points!'),
+                  subtitle:
+                      Text('Complete this challenge to earn extra points!'),
                 ),
               ),
               SizedBox(height: 20),

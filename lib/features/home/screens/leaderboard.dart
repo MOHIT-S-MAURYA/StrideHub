@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stridehub/core/constants/colors.dart';
 
 class LeaderboardScreen extends StatelessWidget {
+  const LeaderboardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,6 @@ class LeaderboardScreen extends StatelessWidget {
           ),
         ),
         elevation: 0,
-
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Container(

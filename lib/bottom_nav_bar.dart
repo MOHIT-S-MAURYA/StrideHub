@@ -7,6 +7,8 @@ import 'package:stridehub/features/home/screens/profile_screen.dart';
 import 'package:stridehub/core/constants/colors.dart';
 
 class BottomNavScreen extends StatefulWidget {
+  const BottomNavScreen({super.key});
+
   @override
   _BottomNavScreenState createState() => _BottomNavScreenState();
 }
@@ -15,10 +17,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    HomeScreen(),        // Home Screen
-    ChallengesScreen(),  // Challenges Screen
+    HomeScreen(), // Home Screen
+    ChallengesScreen(), // Challenges Screen
     LeaderboardScreen(), // Leaderboard Screen
-    ProfileScreen(),     // Profile Screen
+    ProfileScreen(), // Profile Screen
   ];
 
   void _onItemTapped(int index) {
@@ -42,12 +44,15 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
-        body: _screens[_currentIndex],  // Display the current screen based on index
+        body: _screens[
+            _currentIndex], // Display the current screen based on index
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.flag), label: 'Challenges'),
-            BottomNavigationBarItem(icon: Icon(Icons.leaderboard), label: 'Leaderboard'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.flag), label: 'Challenges'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.leaderboard), label: 'Leaderboard'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ],
           currentIndex: _currentIndex,

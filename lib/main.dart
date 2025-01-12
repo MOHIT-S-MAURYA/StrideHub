@@ -21,30 +21,37 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // Using the color scheme based on AppColors
         colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.backgroundColor, 
+          seedColor: AppColors.backgroundColor,
         ),
         useMaterial3: true,
-        scaffoldBackgroundColor: AppColors.backgroundColor, 
+        scaffoldBackgroundColor: AppColors.backgroundColor,
         appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.backgroundColor, 
+          backgroundColor: AppColors.backgroundColor,
         ),
         textTheme: TextTheme(
           // Updated text theme definitions
           bodyLarge: TextStyle(color: AppColors.textColor), // Main body text
-          bodyMedium: TextStyle(color: AppColors.textColor), // Secondary body text
+          bodyMedium:
+              TextStyle(color: AppColors.textColor), // Secondary body text
           bodySmall: TextStyle(color: AppColors.textColor), // Smaller body text
-          titleLarge: TextStyle(color: AppColors.textColor), // Titles and headings
+          titleLarge:
+              TextStyle(color: AppColors.textColor), // Titles and headings
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: AppColors.inputBackgroundColor, // Input background for dark theme
-          hintStyle: TextStyle(color: AppColors.inputHintTextColor), // Input hint color
+          fillColor:
+              AppColors.inputBackgroundColor, // Input background for dark theme
+          hintStyle: TextStyle(
+              color: AppColors.inputHintTextColor), // Input hint color
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.inputBorderColor), // Input field border color
+            borderSide: BorderSide(
+                color: AppColors.inputBorderColor), // Input field border color
           ),
         ),
       ),
-      initialRoute: FirebaseAuth.instance.currentUser == null ? AppRoutes.login : AppRoutes.home,
+      initialRoute: FirebaseAuth.instance.currentUser == null
+          ? AppRoutes.login
+          : AppRoutes.home,
       onGenerateRoute: AppRoutes.generateRoute,
     );
   }

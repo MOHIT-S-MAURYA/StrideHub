@@ -11,7 +11,7 @@ class AppColors {
   static const Color textColor = Colors.black;
 
   // Drawer header color (a muted color to contrast with the dark theme)
-  static const Color drawerHeaderColor = Color(0xECBF7BA);
+  static const Color drawerHeaderColor = Color(0x0ecbf7ba);
 
   // Bottom navigation bar item color (inactive item color)
   static const Color bottomNavigationBarItemColor = Colors.grey;
