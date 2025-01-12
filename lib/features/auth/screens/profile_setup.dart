@@ -36,7 +36,7 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
             List<String> heightParts = _heightController.text.split('\'');
             int feet = int.tryParse(heightParts[0].trim()) ?? 0;
             int inches =
-                int.tryParse(heightParts[1].replaceAll('\"', '').trim()) ?? 0;
+                int.tryParse(heightParts[1].replaceAll('"', '').trim()) ?? 0;
             heightInCm = (feet * 30.48) + (inches * 2.54);
           } else {
             heightInCm = double.tryParse(_heightController.text) ?? 0;
@@ -106,13 +106,12 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
       double heightInCm = double.tryParse(_heightController.text) ?? 0;
       int feet = (heightInCm / 30.48).floor();
       int inches = ((heightInCm / 2.54) % 12).round();
-      _heightController.text = '$feet\' $inches\"';
+      _heightController.text = '$feet\' ${inches}"';
       _heightUnit = 'feet';
     } else {
       List<String> heightParts = _heightController.text.split('\'');
       int feet = int.tryParse(heightParts[0].trim()) ?? 0;
-      int inches =
-          int.tryParse(heightParts[1].replaceAll('\"', '').trim()) ?? 0;
+      int inches = int.tryParse(heightParts[1].replaceAll('"', '').trim()) ?? 0;
       double heightInCm = (feet * 30.48) + (inches * 2.54);
       _heightController.text = heightInCm.toStringAsFixed(2);
       _heightUnit = 'cm';
