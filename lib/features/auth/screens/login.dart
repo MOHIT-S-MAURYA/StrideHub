@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stridehub/core/constants/colors.dart';
 import 'package:stridehub/routes/app_routes.dart';
+import 'package:stridehub/features/auth/services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,7 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final AuthService _authService = AuthService();
   final ValueNotifier<String?> _emailError = ValueNotifier(null);
   final ValueNotifier<bool> _obscurePassword = ValueNotifier(true);
 
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _checkLoginStatus() async {
-    User? user = _auth.currentUser;
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     }
@@ -45,9 +46,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _login() async {
     try {
-      await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
+      await _authService.signIn(
+        _emailController.text,
+        _passwordController.text,
       );
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     } catch (e) {

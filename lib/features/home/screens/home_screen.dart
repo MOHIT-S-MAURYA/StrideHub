@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:stridehub/core/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stridehub/routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,19 +12,22 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false, // Hide the back button
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              'StrideHub',
-              style: GoogleFonts.dancingScript(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textColor,
-              ),
-            ),
-          ],
+        title: Text(
+          'Home',
+          style: GoogleFonts.dosis(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textColor,
+          ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.group),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.friendsList);
+            },
+          ),
+        ],
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
@@ -220,6 +224,27 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+              ),
+              SizedBox(height: 20),
+              // New Buttons Section
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.searchFriends);
+                      },
+                      child: Text('Search Friends'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.friendRequests);
+                      },
+                      child: Text('Friend Requests'),
+                    ),
+                  ],
                 ),
               ),
             ],

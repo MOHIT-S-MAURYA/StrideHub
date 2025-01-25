@@ -1,3 +1,5 @@
+// lib/features/home/screens/profile_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,15 +42,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       DocumentSnapshot userDoc =
           await _firestore.collection('users').doc(user.uid).get();
       if (userDoc.exists) {
-        setState(() {
-          _fullNameController.text = userDoc['fullName'];
-          _phoneNumberController.text = userDoc['phoneNumber'];
-          _dobController.text = userDoc['dob'];
-          _gender = userDoc['gender'];
-          _heightController.text = userDoc['height'];
-          _weightController.text = userDoc['weight'];
-          _email = user.email ?? '';
-        });
+        if (mounted) {
+          setState(() {
+            _fullNameController.text = userDoc['fullName'];
+            _phoneNumberController.text = userDoc['phoneNumber'];
+            _dobController.text = userDoc['dob'];
+            _gender = userDoc['gender'];
+            _heightController.text = userDoc['height'];
+            _weightController.text = userDoc['weight'];
+            _email = user.email ?? '';
+          });
+        }
       }
     }
   }
@@ -76,9 +80,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'heightUnit': _heightUnit,
           'weight': _weightController.text,
         }).then((_) {
-          setState(() {
-            _isEditing = false;
-          });
+          if (mounted) {
+            setState(() {
+              _isEditing = false;
+            });
+          }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Profile updated successfully!')),
           );
@@ -141,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       double heightInCm = double.tryParse(_heightController.text) ?? 0;
       int feet = (heightInCm / 30.48).floor();
       int inches = ((heightInCm / 2.54) % 12).round();
-      _heightController.text = '$feet\' ${inches}"';
+      _heightController.text = '$feet\' $inches"';
       _heightUnit = 'feet';
     } else {
       List<String> heightParts = _heightController.text.split('\'');
@@ -186,7 +192,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Center(
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('assets/default_profile.png'),
+                backgroundImage:
+                    AssetImage('assets/images/default_profile.png'),
               ),
             ),
             SizedBox(height: 20),

@@ -106,7 +106,7 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
       double heightInCm = double.tryParse(_heightController.text) ?? 0;
       int feet = (heightInCm / 30.48).floor();
       int inches = ((heightInCm / 2.54) % 12).round();
-      _heightController.text = '$feet\' ${inches}"';
+      _heightController.text = '$feet\' $inches"';
       _heightUnit = 'feet';
     } else {
       List<String> heightParts = _heightController.text.split('\'');
